@@ -11,6 +11,8 @@ set "ARQUIVO_HEXA=%~1"
 set "NOME_SCRIPT=%~n1"
 set "ARQUIVO_PY=.\hexa_to_python\%NOME_SCRIPT%.py"
 
+if not exist ".\hexa_to_python\" mkdir ".\hexa_to_python"
+
 if exist "%ARQUIVO_PY%" del "%ARQUIVO_PY%"
 
 echo [HexaLang] Transpilando %ARQUIVO_HEXA%...

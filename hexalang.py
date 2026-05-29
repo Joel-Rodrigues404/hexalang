@@ -281,6 +281,7 @@ def transpile(input_file):
         if is_continue:
             python_code.append(indent + "continue")
 
+    os.makedirs("hexa_to_python", exist_ok=True)
     with open("hexa_to_python/" + nome_py, 'w', encoding='utf-8') as f:
         f.write("\n".join(python_code))
 
