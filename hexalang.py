@@ -4,19 +4,11 @@ import os
 BOILERPLATE = r"""import sys
 import time
 import os
-import wave
-import array
 import random
 import threading
 import subprocess
 import json
 import winsound
-import pygame
-
-# ---------------------------------------------------------------------------
-# pygame — só pra inicializar o display, não usado para áudio
-# ---------------------------------------------------------------------------
-pygame.init()
 
 # ---------------------------------------------------------------------------
 # Lista de SFX disponíveis
@@ -39,9 +31,23 @@ SFX_FILES = [
 # ---------------------------------------------------------------------------
 def _speak_subprocess(text: str):
     script = (
-        "import win32com.client;"
-        "s = win32com.client.Dispatch('SAPI.SpVoice');"
-        f"s.Speak({json.dumps(str(text))});"
+        "import win32com.client\n"
+        "speaker = win32com.client.Dispatch('SAPI.SpVoice')\n"
+        "voices = speaker.GetVoices()\n"
+        "selected = None\n"
+        "for i in range(voices.Count):\n"
+        "    v = voices.Item(i)\n"
+        "    name = v.GetDescription().lower()\n"
+        "    if ('portuguese' in name or\n"
+        "        'portugal' in name or\n"
+        "        'brazil' in name or\n"
+        "        'pt-br' in name or\n"
+        "        'pt-pt' in name):\n"
+        "        selected = v\n"
+        "        break\n"
+        "if selected:\n"
+        "    speaker.Voice = selected\n"
+        f"speaker.Speak({json.dumps(str(text))})\n"
     )
     try:
         subprocess.run(
@@ -49,8 +55,8 @@ def _speak_subprocess(text: str):
             timeout=60,
             creationflags=subprocess.CREATE_NO_WINDOW
         )
-    except Exception:
-        pass
+    except Exception as e:
+        print(e)
 
 # ---------------------------------------------------------------------------
 # Chance de 10% de soltar uma vinheta de um time aleatório a cada saída
@@ -82,10 +88,24 @@ def play_sfx(sound_path: str = None):
 # ---------------------------------------------------------------------------
 def _speak_fast_subprocess(text: str):
     script = (
-        "import win32com.client;"
-        "s = win32com.client.Dispatch('SAPI.SpVoice');"
-        "s.Rate = 9;"
-        f"s.Speak({json.dumps(str(text))});"
+        "import win32com.client\n"
+        "speaker = win32com.client.Dispatch('SAPI.SpVoice')\n"
+        "speaker.Rate = 9\n"
+        "voices = speaker.GetVoices()\n"
+        "selected = None\n"
+        "for i in range(voices.Count):\n"
+        "    v = voices.Item(i)\n"
+        "    name = v.GetDescription().lower()\n"
+        "    if ('portuguese' in name or\n"
+        "        'portugal' in name or\n"
+        "        'brazil' in name or\n"
+        "        'pt-br' in name or\n"
+        "        'pt-pt' in name):\n"
+        "        selected = v\n"
+        "        break\n"
+        "if selected:\n"
+        "    speaker.Voice = selected\n"
+        f"speaker.Speak({json.dumps(str(text))})\n"
     )
     try:
         subprocess.run(
@@ -93,8 +113,8 @@ def _speak_fast_subprocess(text: str):
             timeout=60,
             creationflags=subprocess.CREATE_NO_WINDOW
         )
-    except Exception:
-        pass
+    except Exception as e:
+        print(e)
 
 def narrate_fast(text: str):
     clean_text = str(text).replace('\n', ' ')
@@ -113,7 +133,6 @@ def narrate_fast(text: str):
     typewriter_print(text, delay=0.005)
 
     tts_thread.join()
-
 
 def typewriter_print(text: str, delay: float = 0.04):
     for char in str(text):
@@ -154,7 +173,8 @@ def transpile(input_file):
         print("Erro: O arquivo precisa ter a extensao .hexa")
         sys.exit(1)
 
-    output_file = input_file.replace(".hexa", ".py")
+    nome_base = os.path.basename(input_file)
+    nome_py = nome_base.replace(".hexa", ".py")
 
     with open(input_file, 'r', encoding='utf-8') as f:
         lines = f.readlines()
@@ -237,6 +257,13 @@ def transpile(input_file):
                     .replace(" é maior que ", " > ")
                     .replace(" é menor que ", " < "))
             python_code.append(indent + f"while {cond}:")
+        
+        elif " responde a pergunta " in stripped:
+            parts = stripped.split(" responde a pergunta ", 1)
+            var_name = parts[0].strip()
+            prompt = parts[1].strip()
+            # Gera algo como: nome = input("Qual o seu nome? ")
+            python_code.append(indent + f"{var_name} = input({prompt})")
 
         elif " vai mais " in stripped:
             parts = stripped.split(" vai mais ", 1)
@@ -254,11 +281,10 @@ def transpile(input_file):
         if is_continue:
             python_code.append(indent + "continue")
 
-    with open(output_file, 'w', encoding='utf-8') as f:
+    with open("hexa_to_python/" + nome_py, 'w', encoding='utf-8') as f:
         f.write("\n".join(python_code))
 
-    print(f"VAR confirmou a traducao! Arquivo gerado: {output_file}")
-
+    print(f"VAR confirmou a traducao! Arquivo gerado: {nome_py}")
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
