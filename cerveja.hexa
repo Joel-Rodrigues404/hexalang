@@ -1,0 +1,10 @@
+apita o árbitro
+camisa 99 garrafas
+a torcida canta "{garrafas} garrafas de cerveja no muro..."
+
+enquanto garrafas é maior que 0
+    garrafas vai menos 1
+    a torcida conta garrafas...
+
+a torcida canta "fim de papo"
+fim de papo

@@ -1,0 +1,17 @@
+apita o árbitro
+camisa 3 tempo
+a torcida canta "Preparando para a cobranca de falta..."
+
+enquanto tempo é maior que 0
+    vamos as opcoes do banco tempo
+        se entrar o 3:
+            a torcida canta "Autorizou o juiz!"
+        se entrar o 2:
+            a torcida canta "Ele corre pra bola..."
+        se entrar o 1:
+            a torcida canta "Bateu direto pro gol!"
+    tempo vai menos 1
+    .
+
+o estadio grita "GOOOOOOOOOOOL!"
+fim de papo
