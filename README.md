@@ -1,4 +1,4 @@
-# HEXALANG ⚽🔥
+# HEXALANG
 
 > "Aqui o código joga bonito."
 
@@ -6,14 +6,14 @@ O **HexaLang** é uma linguagem inspirada no futebol que transpila arquivos `.he
 
 Ela transforma código em uma experiência divertida com:
 
-* 🎙️ Narração em voz
-* 📢 Sons de torcida
-* ⌨️ Efeito máquina de escrever
-* 🇧🇷 Sintaxe em português
+* Narração em voz
+* Sons de torcida
+* Efeito máquina de escrever
+* Sintaxe em português
 
 ---
 
-# 📁 Estrutura do Projeto
+# Estrutura do Projeto
 
 ```txt
 HEXALANG/
@@ -38,7 +38,7 @@ HEXALANG/
 
 ---
 
-# ⚙️ Requisitos
+# Requisitos
 
 ## Python
 
@@ -54,7 +54,7 @@ https://www.python.org/downloads/
 
 ---
 
-# 📦 Instalação das Dependências
+# Instalação das Dependências
 
 O HexaLang usa:
 
@@ -69,11 +69,11 @@ pip install pywin32
 
 ---
 
-# 🔊 Instalando Voz em Português
+# Instalando Voz em Português
 
 Caso o Windows não tenha voz PT-BR instalada, siga os passos abaixo.
 
-## ✅ Pré-requisitos
+## Pré-requisitos
 
 * Windows 10 ou 11
 * PowerShell como Administrador
@@ -81,7 +81,7 @@ Caso o Windows não tenha voz PT-BR instalada, siga os passos abaixo.
 
 ---
 
-## 🚀 Instalar Voz PT-BR
+## Instalar Voz PT-BR
 
 Abra o **PowerShell como Administrador** e execute:
 
@@ -91,7 +91,7 @@ Add-WindowsCapability -Online -Name Language.TextToSpeech~~~pt-BR~0.0.1.0
 
 ---
 
-## 🔧 Habilitar a voz no SAPI5
+## Habilitar a voz no SAPI5
 
 Execute os comandos abaixo linha por linha:
 
@@ -105,7 +105,7 @@ Copy-Item -Path $source -Destination $dest -Recurse -Force
 
 ---
 
-## 🧪 Verificar instalação
+## Verificar instalação
 
 Na pasta do projeto execute:
 
@@ -121,7 +121,7 @@ Microsoft Maria - Portuguese (Brazil)
 
 ---
 
-# ▶️ Como Executar
+# Como Executar
 
 ## 1. Crie um arquivo `.hexa`
 
@@ -166,7 +166,7 @@ O sistema irá:
 
 ---
 
-# ⚠️ Importante
+# Importante
 
 O `hexa.bat` funciona apenas dentro da pasta do projeto.
 
@@ -186,7 +186,7 @@ python arquivo.py
 
 ---
 
-# 📌 Exemplo Completo
+# Exemplo Completo
 
 ```txt
 apita o árbitro
@@ -208,9 +208,9 @@ fim de papo
 
 ---
 
-# 📚 Sintaxe Básica
+# Sintaxe Básica
 
-## 📢 Narrar texto
+## Narrar texto
 
 ```txt
 a torcida canta "Olá mundo!"
@@ -218,7 +218,7 @@ a torcida canta "Olá mundo!"
 
 ---
 
-## 🔢 Criar variável
+## Criar variável
 
 ```txt
 camisa 10 gols
@@ -232,7 +232,7 @@ gols = 10
 
 ---
 
-## ➕ Somar
+## Somar
 
 ```txt
 gols vai mais 1
@@ -240,7 +240,7 @@ gols vai mais 1
 
 ---
 
-## ➖ Subtrair
+## Subtrair
 
 ```txt
 gols vai menos 1
@@ -248,7 +248,7 @@ gols vai menos 1
 
 ---
 
-## 🔁 Loop
+## Loop
 
 ```txt
 enquanto gols é menor que 5
@@ -256,7 +256,7 @@ enquanto gols é menor que 5
 
 ---
 
-## ❓ Condição
+## Condição
 
 ```txt
 chama o var pra ver se gols é igual a 5
@@ -264,7 +264,7 @@ chama o var pra ver se gols é igual a 5
 
 ---
 
-## ⌨️ Entrada de usuário
+## Entrada de usuário
 
 ```txt
 nome responde a pergunta "Qual seu nome?"
@@ -272,7 +272,7 @@ nome responde a pergunta "Qual seu nome?"
 
 ---
 
-# 🔊 Sistema de Áudio
+# Sistema de Áudio
 
 A cada saída do código existe uma chance de tocar uma vinheta aleatória.
 
@@ -292,7 +292,7 @@ audios/meu_audio.wav
 
 ---
 
-# 🛠️ Como Funciona
+# Como Funciona
 
 ```txt
 Arquivo .hexa
@@ -308,7 +308,7 @@ Narração + Sons + Texto
 
 ---
 
-# 📚 Exemplos
+# Exemplos
 
 ## Hello World
 
@@ -338,6 +338,3 @@ nome responde a pergunta "Qual o seu nome?"
 
 a torcida canta "Olá {nome}"
 ```
-
----
-
